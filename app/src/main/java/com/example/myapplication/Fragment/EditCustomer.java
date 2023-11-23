@@ -10,36 +10,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.myapplication.Activity.MainActivity;
-import com.example.myapplication.Helper.SQLiteHelper;
 import com.example.myapplication.Model.Customer;
 import com.example.myapplication.R;
 import com.example.myapplication.SQLite.CustomerSQLite;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Login#newInstance} factory method to
+ * Use the {@link EditCustomer#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Login extends Fragment {
+public class EditCustomer extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private CustomerSQLite helper;
-    private EditText email, password;
-    private TextView messageInfo;
-    private Button btnLogin;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button btnLogOut;
+    private CustomerSQLite helper;
+    private Customer customer;
 
-    public Login() {
+    public EditCustomer() {
         // Required empty public constructor
     }
 
@@ -49,11 +45,11 @@ public class Login extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Login.
+     * @return A new instance of fragment EditCustomer.
      */
     // TODO: Rename and change types and number of parameters
-    public static Login newInstance(String param1, String param2) {
-        Login fragment = new Login();
+    public static EditCustomer newInstance(String param1, String param2) {
+        EditCustomer fragment = new EditCustomer();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,37 +61,34 @@ public class Login extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
-        AnhXa(view); // Call AnhXa() with the inflated view
+
+        View view = inflater.inflate(R.layout.fragment_edit_customer, container, false);
+        AnhXa(view);
         ButtonActive();
         return view;
+
     }
 
     private void ButtonActive() {
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Customer customer = helper.isPasswordCorrect(email.getText().toString().trim(), password.getText().toString().trim());
-                if (customer == null) {
-                    messageInfo.setText("Sai rồi");
-                } else {
-                    helper.addCustomer(customer);
-                    Activity activity = getActivity();
-                    if (activity != null) {
-                        activity.finish();
-                        Intent intent = new Intent(activity, MainActivity.class);
-                        activity.startActivity(intent);
-                    }
+                helper.deleteUserWasLogin();
+                Activity activity = getActivity();
+                if (activity != null) {
+                    activity.finish(); // Kết thúc Fragment hiện tại
+
+                    Intent intent = new Intent(activity, MainActivity.class);
+                    activity.startActivity(intent); // Khởi chạy Activity mới
                 }
             }
         });
@@ -103,9 +96,7 @@ public class Login extends Fragment {
 
     private void AnhXa(View view) {
         helper = new CustomerSQLite(getContext());
-        email = view.findViewById(R.id.EmailLogin);
-        password = view.findViewById(R.id.PasswrodLogin);
-        btnLogin = view.findViewById(R.id.btnLogin);
-        messageInfo = view.findViewById(R.id.messageInfo);
+        customer = helper.customerWasLogin();
+        btnLogOut = view.findViewById(R.id.btnLogout);
     }
 }
