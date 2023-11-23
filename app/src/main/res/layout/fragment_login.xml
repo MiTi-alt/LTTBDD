@@ -62,6 +62,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/messageInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.7"
@@ -79,6 +80,7 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/EmailLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress" />
@@ -95,6 +97,7 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/PasswrodLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/password_icon"
@@ -126,6 +129,7 @@
                     android:layout_height="10dp" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="Login"
