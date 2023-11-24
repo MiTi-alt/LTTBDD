@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.myapplication.Fragment.EditCustomer;
-import com.example.myapplication.Fragment.Favorite;
+import com.example.myapplication.Fragment.Youtobe;
 import com.example.myapplication.Fragment.History;
 import com.example.myapplication.Fragment.Home;
 import com.example.myapplication.Fragment.Login;
@@ -34,7 +34,7 @@ public class ViewPageAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new Home();
             case 1:
-                return  new Favorite();
+                return  new Youtobe();
             case 2:
                 return  new History();
             case 3:
@@ -66,7 +66,7 @@ public class ViewPageAdapter extends FragmentStatePagerAdapter {
                 title ="Trang chủ";
                 break;
             case 1:
-                title="Giải trí";
+                title="Video";
                 break;
             case 2:
                 title="Lịch sử";
