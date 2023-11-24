@@ -21,6 +21,16 @@ public class Customer {
         this.idAdmin = idAdmin;
     }
 
+    public Customer(String email, String name, String password, String profilePicUrl, String uID, String token, int idAdmin) {
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.profilePicUrl = profilePicUrl;
+        this.uID = uID;
+        this.token = token;
+        this.idAdmin = idAdmin;
+    }
+
     public Customer() {
     }
 

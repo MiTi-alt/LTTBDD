@@ -2,6 +2,7 @@ package com.example.myapplication.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,13 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.Helper.SQLiteHelper;
 import com.example.myapplication.Model.Customer;
 import com.example.myapplication.R;
 import com.example.myapplication.SQLite.CustomerSQLite;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +40,8 @@ public class Login extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private CustomerSQLite helper;
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
     private EditText email, password;
     private TextView messageInfo;
     private Button btnLogin;
@@ -38,6 +49,7 @@ public class Login extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView googleBtn;
 
     public Login() {
         // Required empty public constructor
@@ -52,14 +64,6 @@ public class Login extends Fragment {
      * @return A new instance of fragment Login.
      */
     // TODO: Rename and change types and number of parameters
-    public static Login newInstance(String param1, String param2) {
-        Login fragment = new Login();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class Login extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         AnhXa(view); // Call AnhXa() with the inflated view
         ButtonActive();
+        LoginWithGoogle();
         return view;
     }
 
@@ -107,5 +112,72 @@ public class Login extends Fragment {
         password = view.findViewById(R.id.PasswrodLogin);
         btnLogin = view.findViewById(R.id.btnLogin);
         messageInfo = view.findViewById(R.id.messageInfo);
+        googleBtn = view.findViewById(R.id.googleBtn);
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .build();
+        gsc = GoogleSignIn.getClient(getContext(), gso);
     }
+
+
+
+    private void LoginWithGoogle() {
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
+        googleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+                GoogleSignInAccount acc = GoogleSignIn.getLastSignedInAccount(getContext());
+                if (acc != null) {
+
+                    String personName = acct.getDisplayName();
+                    String personEmail = acct.getEmail();
+                    Uri personPhoto = acct.getPhotoUrl();
+                    String picture = "";
+                    if (personPhoto != null) {
+                         picture = personPhoto.toString();
+
+                    }
+                    Customer customer = new Customer(personName, personEmail,"LoginWithGoogle",picture,null,null,1);
+                    helper.addCustomer(customer);
+                    Activity activity = getActivity();
+                    if (activity != null) {
+                        activity.finish();
+                        Intent intent = new Intent(activity, MainActivity.class);
+                        activity.startActivity(intent);
+                    }
+
+
+
+                } else {
+
+
+                }
+
+            }
+        });
+
+    }
+
+    void signIn() {
+        Intent signInIntent = gsc.getSignInIntent();
+        startActivityForResult(signInIntent, 1000);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1000) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
+            try {
+                task.getResult(ApiException.class);
+
+            } catch (ApiException e) {
+
+            }
+        }
+
+    }
+
 }
