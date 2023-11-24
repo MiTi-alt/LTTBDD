@@ -32,7 +32,7 @@ public class Home extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private TextView btnYoutobe,btnGoogleMap;
+    private TextView btnYoutobe,btnGoogleMap,btnQR;
     private ImageView imageHome;
     private TextView textSuKien;
     private ViewPager viewPager;
@@ -124,6 +124,29 @@ public class Home extends Fragment {
 
             }
         });
+        btnQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo instance của Fragment mới
+
+                textSuKien.setText("QR code");
+                imageHome.setVisibility(View.GONE);
+                horizontalScrollView.setVisibility(View.GONE);
+                QRCode fragment = new QRCode();
+                // Lấy đối tượng FragmentManager
+                FragmentManager fragmentManager = getParentFragmentManager();
+
+                // Bắt đầu giao dịch Fragment
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Thay thế Fragment hiện tại trong GridLayout bằng Fragment mới
+                fragmentTransaction.replace(R.id.gridLayout, fragment);
+
+                // Kết thúc giao dịch Fragment
+                fragmentTransaction.commit();
+
+            }
+        });
     }
 
     private void AnhXa(View view) {
@@ -133,6 +156,7 @@ public class Home extends Fragment {
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
         imageHome = view.findViewById(R.id.imageHome);
         btnGoogleMap= view.findViewById(R.id.btnGoogleMap);
+        btnQR = view.findViewById(R.id.btnQR);
     }
 
 }

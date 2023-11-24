@@ -71,13 +71,14 @@
 
                 <!-- Icon 4 -->
                 <TextView
+                    android:id="@+id/btnQR"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:drawableTop="@drawable/baseline_newspaper_24"
+                    android:gravity="center"
                     android:text="Quét mã Qr" />
 
                 <!-- Cot 2 -->
