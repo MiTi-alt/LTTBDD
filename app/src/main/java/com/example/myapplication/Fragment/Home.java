@@ -1,16 +1,12 @@
 package com.example.myapplication.Fragment;
 
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +32,9 @@ public class Home extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private TextView btnYoutobe;
+    private TextView btnYoutobe,btnGoogleMap,btnQR;
     private ImageView imageHome;
+    private TextView textSuKien;
     private ViewPager viewPager;
     private HorizontalScrollView horizontalScrollView;
 
@@ -104,36 +101,62 @@ public class Home extends Fragment {
 
             }
         });
+        btnGoogleMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo instance của Fragment mới
 
+                textSuKien.setText("Google map");
+                imageHome.setVisibility(View.GONE);
+                horizontalScrollView.setVisibility(View.GONE);
+                FGoogleMap fragment = new FGoogleMap();
+                // Lấy đối tượng FragmentManager
+                FragmentManager fragmentManager = getParentFragmentManager();
+
+                // Bắt đầu giao dịch Fragment
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Thay thế Fragment hiện tại trong GridLayout bằng Fragment mới
+                fragmentTransaction.replace(R.id.gridLayout, fragment);
+
+                // Kết thúc giao dịch Fragment
+                fragmentTransaction.commit();
+
+            }
+        });
+        btnQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo instance của Fragment mới
+
+                textSuKien.setText("QR code");
+                imageHome.setVisibility(View.GONE);
+                horizontalScrollView.setVisibility(View.GONE);
+                QRCode fragment = new QRCode();
+                // Lấy đối tượng FragmentManager
+                FragmentManager fragmentManager = getParentFragmentManager();
+
+                // Bắt đầu giao dịch Fragment
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Thay thế Fragment hiện tại trong GridLayout bằng Fragment mới
+                fragmentTransaction.replace(R.id.gridLayout, fragment);
+
+                // Kết thúc giao dịch Fragment
+                fragmentTransaction.commit();
+
+            }
+        });
     }
 
     private void AnhXa(View view) {
+        textSuKien = view.findViewById(R.id.textSuKien);
         viewPager= view.findViewById(R.id.view_pager);
         btnYoutobe = view.findViewById(R.id.btnYoutobe);
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
         imageHome = view.findViewById(R.id.imageHome);
+        btnGoogleMap= view.findViewById(R.id.btnGoogleMap);
+        btnQR = view.findViewById(R.id.btnQR);
     }
-    private void startNewActivity(Class<? extends Activity> activityClass) {
-        Intent intent = new Intent(getActivity(), activityClass);
-        startActivity(intent);
 
-    }
-    private void replaceFragment(Fragment fragment) {
-        if (fragment != null) {
-            // Lấy ra FragmentManager từ activity
-            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-
-            // Bắt đầu giao dịch fragment
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-            // Thay thế fragment hiện tại bằng fragment mới
-            transaction.replace(R.id.fragment_container, fragment);
-
-            // Thêm transaction vào back stack (nếu muốn cho phép quay lại fragment cũ bằng nút back)
-            transaction.addToBackStack(null);
-
-            // Áp dụng các thay đổi
-            transaction.commit();
-        }
-    }
 }

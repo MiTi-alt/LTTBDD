@@ -71,13 +71,14 @@
 
                 <!-- Icon 4 -->
                 <TextView
+                    android:id="@+id/btnQR"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:drawableTop="@drawable/baseline_newspaper_24"
+                    android:gravity="center"
                     android:text="Quét mã Qr" />
 
                 <!-- Cot 2 -->
@@ -94,13 +95,14 @@
 
                 <!-- Icon 6 -->
                 <TextView
+                    android:id="@+id/btnGoogleMap"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:drawableTop="@drawable/maps"
+                    android:gravity="center"
                     android:text="Goople-maps" />
 
                 <!-- Icon 7 -->
@@ -126,22 +128,23 @@
                     android:drawableTop="@drawable/chungkhoan"
                     android:text="Chứng khoáng" />
             </GridLayout>
+
             <TextView
+                android:id="@+id/textSuKien"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/seablue"
+                android:paddingLeft="20dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:paddingLeft="20dp"
-                android:layout_width="match_parent"
                 android:text="Sự kiện"
-                android:textColor="@color/white"
-                android:layout_height="wrap_content">
-            </TextView>
+                android:textColor="@color/white"></TextView>
 
             <GridLayout
 
                 android:id="@+id/gridLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:columnCount="4"
                 android:paddingTop="5dp"
                 android:rowCount="2"
