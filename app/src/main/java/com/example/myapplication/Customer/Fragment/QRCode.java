@@ -1,4 +1,4 @@
-package com.example.myapplication.Fragment;
+package com.example.myapplication.Customer.Fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
