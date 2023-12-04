@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/fragment_container"
     android:background="@color/design_default_color_error"
-    tools:context=".Fragment.Home">
+    tools:context=".Customer.Fragment.Home">
 
 
     <RelativeLayout

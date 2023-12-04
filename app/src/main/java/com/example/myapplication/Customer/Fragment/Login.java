@@ -1,4 +1,4 @@
-package com.example.myapplication.Fragment;
+package com.example.myapplication.Customer.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,10 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.myapplication.Activity.MainActivity;
-import com.example.myapplication.Helper.SQLiteHelper;
+import com.example.myapplication.Customer.Activity.MainActivity;
 import com.example.myapplication.Model.Customer;
 import com.example.myapplication.R;
 import com.example.myapplication.SQLite.CustomerSQLite;

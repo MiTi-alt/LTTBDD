@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapter;
+package com.example.myapplication.Customer.Adapter;
 
 import android.content.Context;
 
@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.myapplication.Fragment.EditCustomer;
-import com.example.myapplication.Fragment.Youtobe;
-import com.example.myapplication.Fragment.History;
-import com.example.myapplication.Fragment.Home;
-import com.example.myapplication.Fragment.Login;
+import com.example.myapplication.Customer.Fragment.EditCustomer;
+import com.example.myapplication.Customer.Fragment.Youtobe;
+import com.example.myapplication.Customer.Fragment.History;
+import com.example.myapplication.Customer.Fragment.Home;
+import com.example.myapplication.Customer.Fragment.Login;
 import com.example.myapplication.Model.Customer;
 import com.example.myapplication.SQLite.CustomerSQLite;
 

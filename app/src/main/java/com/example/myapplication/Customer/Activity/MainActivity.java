@@ -1,4 +1,4 @@
-package com.example.myapplication.Activity;
+package com.example.myapplication.Customer.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -6,7 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.example.myapplication.Adapter.ViewPageAdapter;
+import com.example.myapplication.Customer.Adapter.ViewPageAdapter;
 import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 
